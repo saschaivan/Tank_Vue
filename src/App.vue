@@ -1,87 +1,65 @@
 <template>
   <v-app id="inspire">
-    <v-app-bar
+    <v-navigation-drawer
+        draw
         app
-        color="white"
-        flat
     >
-      <v-avatar
-          :color="$vuetify.breakpoint.smAndDown ? 'grey darken-1' : 'transparent'"
-          size="32"
-      ></v-avatar>
+      <v-list-item>
+        <v-list-item-content>
+          <v-list-item-title class="title">
+            Tank
+          </v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
 
-      <v-tabs
-          centered
-          class="ml-n9"
-          color="grey darken-1"
+      <v-divider></v-divider>
+
+      <v-list
+          dense
+          nav
       >
-        <v-tab
-            v-for="link in links"
-            :key="link"
+        <v-list-item
+            v-for="item in items"
+            :key="item.title"
+            :to="item.to"
+            link
         >
-          {{ link }}
-        </v-tab>
-      </v-tabs>
+          <v-list-item-icon>
+            <v-icon>{{ item.icon }}</v-icon>
+          </v-list-item-icon>
 
-      <v-avatar
-          class="hidden-sm-and-down"
-          color="grey darken-1 shrink"
-          size="32"
-      ></v-avatar>
+          <v-list-item-content>
+            <v-list-item-title>{{ item.title }}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
+
+    <v-app-bar app>
+      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+
+      <v-toolbar-title>Tank</v-toolbar-title>
     </v-app-bar>
 
-    <v-main class="grey lighten-3">
-      <v-container>
-        <v-row>
-          <v-col
-              cols="12"
-              sm="2"
-          >
-            <v-sheet
-                rounded="lg"
-                min-height="268"
-            >
-              <!--  -->
-            </v-sheet>
-          </v-col>
-
-          <v-col
-              cols="12"
-              sm="8"
-          >
-            <v-sheet
-                min-height="70vh"
-                rounded="lg"
-            >
-              <!--  -->
-            </v-sheet>
-          </v-col>
-
-          <v-col
-              cols="12"
-              sm="2"
-          >
-            <v-sheet
-                rounded="lg"
-                min-height="268"
-            >
-              <!--  -->
-            </v-sheet>
-          </v-col>
-        </v-row>
-      </v-container>
+    <v-main>
+      <!--  -->
+      <router-view></router-view>
     </v-main>
   </v-app>
 </template>
 
 <script>
 export default {
-  data: () => ({
-    links: [
-      'Start',
-      'Tank',
-      'About',
-    ],
-  }),
+  data () {
+    return {
+      draw: null,
+      items: [
+        { title: 'Start', to:'/menu'},
+        { title: 'Game', to:'/game'},
+        { title: 'About', to:'/about' },
+      ],
+      right: null,
+    }
+  },
 }
 </script>
