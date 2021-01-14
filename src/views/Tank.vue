@@ -15,7 +15,9 @@
 import Game from "@/components/Game";
 export default {
   name: "Tank",
-  components: { Game }
+  components: { Game },
+  methods: {
+  }
 }
 </script>
 

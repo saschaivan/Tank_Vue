@@ -17,7 +17,7 @@
     </div>
     -->
     <v-row>
-      <button class="menubutton" @click="getGame()">Start</button>
+      <button class="menubutton" @click="getGame(); getMap();">Start</button>
     </v-row>
     <v-row>
       <button class="menubutton" @click="$router.push('about')">About</button>
@@ -45,15 +45,24 @@ export default {
   computed: {
     ...mapGetters({
       Game: "Game"
+    }),
+    ...mapGetters({
+      Map: "Map"
     })
   },
   methods: {
     ...mapActions({
-      getGame:"getGame"
+      getGame: "getGame"
+    }),
+    ...mapActions({
+      getMap: "getMapCoordinates"
     })
   },
   watch: {
     Game: function () {
+      this.$router.push('game')
+    },
+    Map: function() {
       this.$router.push('game')
     }
   }
