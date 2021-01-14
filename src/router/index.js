@@ -1,14 +1,13 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
-
+import TankMenu from "@/views/TankMenu";
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home
+    name: 'MainMenu',
+    component: TankMenu
   },
   {
     path: '/about',
@@ -17,6 +16,16 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+  },
+  {
+    path: '/game',
+    name: 'Game',
+    component: () => import('../views/Tank.vue')
+  },
+  {
+    path: '/controls',
+    name: 'Controls',
+    component: () => import('../views/Controls.vue')
   }
 ]
 
