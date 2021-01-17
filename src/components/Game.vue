@@ -1,10 +1,10 @@
 <template>
   <v-row>
-    <v-btn v-on:click="getGame()">Start</v-btn>
-    <v-btn v-on:click="moveLeft('A')">Left</v-btn>
-    <v-btn v-on:click="moveRight('D')">Right</v-btn>
+    <div class="playbuttons">
+      <v-btn v-on:click="moveLeft('A')">Left</v-btn>
+      <v-btn v-on:click="moveRight('D')">Right</v-btn>
+    </div>
   </v-row>
-
 </template>
 
 <script>
@@ -53,6 +53,15 @@ export default {
     image.onload = () => {
       this.img = image;
     };
+    console.log(this.Game);
+    this.tank_player1.Name.push(this.Game.game.player1.name);
+    this.tank_player2.Name.push(this.Game.game.player2.name);
+    this.tank_player1.x = this.Game.game.player1.posx * 16; // ~15 -> 240 (16)
+    this.tank_player1.y = this.Game.game.player1.posy * 32; // ~11 -> 350 (32)
+    this.tank_player2.x = this.Game.game.player2.posx * 13; // ~88 -> 1100 (13)
+    this.tank_player2.y = this.Game.game.player2.posy * 39; // ~9 -> 350 (39)
+    this.getMap();
+    this.tankGame();
   },
   computed: {
     ...mapGetters({
@@ -69,17 +78,6 @@ export default {
     ...mapActions({
       updateGame: "updateGame"
     }),
-    getGame: function () {
-      console.log(this.Game);
-      this.tank_player1.Name.push(this.Game.game.player1.name);
-      this.tank_player2.Name.push(this.Game.game.player2.name);
-      this.tank_player1.x = this.Game.game.player1.posx * 16; // ~15 -> 240 (16)
-      this.tank_player1.y = this.Game.game.player1.posy * 32; // ~11 -> 350 (32)
-      this.tank_player2.x = this.Game.game.player2.posx * 13; // ~88 -> 1100 (13)
-      this.tank_player2.y = this.Game.game.player2.posy * 39; // ~9 -> 350 (39)
-      this.getMap();
-      this.tankGame();
-    },
     getMap: function () {
       for (let i = 0; i < this.Map.map.length - 1; i++) {
         this.map.mapfirstx.push(this.Map.map[i][0] + 240); // get the x value out of the array of arrays, 0 -> +240 (scale)

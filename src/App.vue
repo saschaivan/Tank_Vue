@@ -135,4 +135,10 @@
     padding-left: 30px;
   }
 
+  .playbuttons {
+    margin-left: auto;
+    margin-right: auto;
+
+  }
+
 </style>
