@@ -13,6 +13,8 @@
 </script>
 
 <style>
+
+  /* Menu */
   .menubutton {
     margin-left: auto;
     margin-right: auto;
@@ -68,6 +70,21 @@
     height: 100%;
   }
 
+  @media(max-width: 1500px) {
+    .menubutton {
+      font-size: 40px;
+      padding: 7px;
+    }
+  }
+
+  @media(max-width: 800px) {
+    .menubutton {
+      font-size: 30px;
+      padding: 5px;
+    }
+  }
+
+  /* Game */
   .map {
     background-color: lightblue;
     padding:10px;
@@ -79,7 +96,6 @@
      border-color: black;
      margin-left: auto;
      margin-right: auto;
-     padding-left: 5em;
   }
 
   #container {
@@ -90,7 +106,6 @@
     position: relative;
     display: flex;
     font-weight: bold;
-    padding-left: 20px;
   }
 
   .gameplay_buttons {
@@ -103,12 +118,38 @@
   #player2 {
     margin-right: auto;
     margin-left: auto;
+    float: right;
   }
 
   #player1 {
     margin-right: auto;
     margin-left: auto;
+    float: left;
   }
+
+  @media(max-width: 1500px) {
+    #mycanvas {
+      width: 900px;
+      height: 500px;
+    }
+    .map {
+      width: 900px;
+      height: 500px;
+    }
+  }
+
+  @media(max-width: 800px) {
+    #mycanvas {
+      width: 700px;
+      height: 400px;
+    }
+    .map {
+      width: 700px;
+      height: 400px;
+    }
+  }
+
+  /* About */
 
   #aboutcontainer {
     width: 100%;

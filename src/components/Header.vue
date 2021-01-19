@@ -70,5 +70,27 @@ export default {
     font-size: 100px;
     padding-top: 70px;
   }
+
+  @media(max-width: 1500px) {
+    #Tank-header {
+      height: 300px;
+    }
+    #Tank-header h1 {
+      font-size: 80px;
+      padding-top: 60px;
+
+    }
+  }
+
+  @media(max-width: 800px) {
+    #Tank-header {
+      height: 250px;
+    }
+    #Tank-header h1 {
+      font-size: 60px;
+      padding-top: 40px;
+      height: 100px;
+    }
+  }
 </style>
 

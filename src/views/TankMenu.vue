@@ -2,15 +2,11 @@
   <v-container id="menucontainer">
     <Header></Header>
     <v-row>
-      <button class="menubutton" @click="getGame(); getMap();">Start</button>
+      <button class="menubutton" @click="getGame(); getMapCoordinates();">Start</button>
     </v-row>
     <v-row>
       <button class="menubutton" @click="$router.push('about')">About</button>
     </v-row>
-    <v-row>
-      <button class="menubutton" @click="$router.push('controls')">Controls</button>
-    </v-row>
-
     <Footer></Footer>
   </v-container>
 </template>
@@ -35,7 +31,7 @@ export default {
       getGame: "getGame"
     }),
     ...mapActions({
-      getMap: "getMapCoordinates"
+      getMapCoordinates: "getMapCoordinates"
     })
   },
   watch: {

@@ -6,13 +6,13 @@
       <label>{{ player_data.player1life }}</label>
       <br>
       <label>{{ player_data.player1angle }}</label>
+      <br>
+      <label>{{ player_data.moves }}</label>
     </div>
     <div class="game">
       <div class="map">
-        <div id="gameMap">
           <canvas id="mycanvas" width="1100" height="600"></canvas>
           <Game></Game>
-        </div>
       </div>
     </div>
     <div id="player2">
@@ -21,6 +21,8 @@
       <label>{{ player_data.player2life }}</label>
       <br>
       <label>{{ player_data.player2angle }}</label>
+      <br>
+      <label>{{ player_data.moves }}</label>
     </div>
   </div>
 </template>
@@ -39,7 +41,8 @@ export default {
         player1life: "",
         player1angle: "",
         player2life: "",
-        player2angle: ""
+        player2angle: "",
+        moves: 0
       }
     }
   },
@@ -55,6 +58,7 @@ export default {
       this.player_data.player2life = this.Game.game.tank.life2;
       this.player_data.player1angle = this.Game.game.tank.angle1;
       this.player_data.player2angle = this.Game.game.tank.angle2;
+      this.player_data.moves = this.Game.game.map.moves;
   },
   methods: {
   }
@@ -62,5 +66,4 @@ export default {
 </script>
 
 <style scoped>
-
 </style>

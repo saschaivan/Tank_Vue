@@ -1,6 +1,7 @@
 <template>
   <v-row>
     <div class="playbuttons">
+      <v-btn v-on:click="startGame()">Start</v-btn>
       <v-btn v-on:click="moveLeft('A')">Left</v-btn>
       <v-btn v-on:click="moveRight('D')">Right</v-btn>
     </div>
@@ -15,11 +16,9 @@ export default {
     return {
       canvas: null,
       ctx: null,
-      map: {
-        mapfirstx: [],
-        mapfirsty: [],
-        maplastx: [],
-        maplasty: []
+      mapcoordinates: {
+        mapx: [],
+        mapy: []
       },
       tank_player1: {
         Name: [],
@@ -53,15 +52,6 @@ export default {
     image.onload = () => {
       this.img = image;
     };
-    console.log(this.Game);
-    this.tank_player1.Name.push(this.Game.game.player1.name);
-    this.tank_player2.Name.push(this.Game.game.player2.name);
-    this.tank_player1.x = this.Game.game.player1.posx * 16; // ~15 -> 240 (16)
-    this.tank_player1.y = this.Game.game.player1.posy * 32; // ~11 -> 350 (32)
-    this.tank_player2.x = this.Game.game.player2.posx * 13; // ~88 -> 1100 (13)
-    this.tank_player2.y = this.Game.game.player2.posy * 39; // ~9 -> 350 (39)
-    this.getMap();
-    this.tankGame();
   },
   computed: {
     ...mapGetters({
@@ -78,24 +68,38 @@ export default {
     ...mapActions({
       updateGame: "updateGame"
     }),
-    getMap: function () {
-      for (let i = 0; i < this.Map.map.length - 1; i++) {
-        this.map.mapfirstx.push(this.Map.map[i][0] + 240); // get the x value out of the array of arrays, 0 -> +240 (scale)
-        this.map.mapfirsty.push(this.Map.map[i][1] * 35); // get the y value out of the array of arrays, 10 -> *35 = 350 (scale)
-      }
-      this.map.maplastx.push(this.Map.map[this.Map.map.length - 1][0] * 11); // ~100 -> 1100 (11)
-      this.map.maplasty.push(this.Map.map[this.Map.map.length - 1][1] * 35); // 10 -> 350 (35)
+    startGame: function () {
+      this.tank_player1.Name.push(this.Game.game.player1.name);
+      this.tank_player2.Name.push(this.Game.game.player2.name);
+      this.tank_player1.x = this.Game.game.player1.posx * 16; // ~15 -> 240 (16)
+      this.tank_player1.y = this.Game.game.player1.posy * 32; // ~11 -> 350 (32)
+      this.tank_player2.x = this.Game.game.player2.posx * 13; // ~88 -> 1100 (13)
+      this.tank_player2.y = this.Game.game.player2.posy * 39; // ~9 -> 350 (39)
+      this.getMap();
+      this.tankGame();
     },
     tankGame: function () {
       setInterval(() => {
-        this.drawGame(this.map.mapfirstx[0], this.map.mapfirsty[0], this.map.maplastx, this.map.maplasty);
+        this.drawGame(this.mapcoordinates.mapx, this.mapcoordinates.mapy, this.mapcoordinates.mapx, this.mapcoordinates.mapy);
       }, 1);
+    },
+    getMap: function () {
+      let i = 0;
+      while(i < this.Map.map.length - 1) {
+        this.mapcoordinates.mapx.push(this.Map.map[i]); // get the x value out of the array of arrays, 0 -> +240 (scale)
+        this.mapcoordinates.mapy.push(this.Map.map[i + 1]); // get the y value out of the array of arrays, 10 -> *35 = 350 (scale)
+        i += 2;
+      }
     },
     drawGame: function (X1, Y1, X2, Y2) {
       this.ctx.clearRect(0, 0, 1100, 600);
       this.ctx.drawImage(this.img, this.tank_player1.x - this.tank_player1.dx, this.tank_player1.y - this.tank_player1.dy);
       this.flip(this.img);
-      this.drawing(X1, Y1, X2, Y2);
+      let i = 0;
+      while(i < this.mapcoordinates.mapx.length - 1) {
+        this.drawing(X1[i], Y1[i], X2[i + 1], Y2[i + 1]);
+        i += 2;
+      }
     },
     flip(img) {
       this.ctx.translate(this.tank_player2.x - this.tank_player2.dx, this.tank_player2.y - this.tank_player2.dy);
