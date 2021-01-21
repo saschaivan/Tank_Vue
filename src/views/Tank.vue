@@ -1,13 +1,11 @@
 <template>
   <div id="container">
     <div id="player1">
-      <label>{{ player_data.player1 }}</label>
+      <label>Name: {{ player_data.player1 }}</label>
       <br>
-      <label>{{ player_data.player1life }}</label>
+      <label>Life: {{ player_data.player1life }}</label>
       <br>
-      <label>{{ player_data.player1angle }}</label>
-      <br>
-      <label>{{ player_data.moves }}</label>
+      <label>Angle: {{ player_data.player1angle }}</label>
     </div>
     <div class="game">
       <div class="map">
@@ -16,13 +14,11 @@
       </div>
     </div>
     <div id="player2">
-      <label>{{ player_data.player2 }}</label>
+      <label>Name: {{ player_data.player2 }}</label>
       <br>
-      <label>{{ player_data.player2life }}</label>
+      <label>Life: {{ player_data.player2life }}</label>
       <br>
-      <label>{{ player_data.player2angle }}</label>
-      <br>
-      <label>{{ player_data.moves }}</label>
+      <label>Angle: {{ player_data.player2angle }}</label>
     </div>
   </div>
 </template>
@@ -42,7 +38,6 @@ export default {
         player1angle: "",
         player2life: "",
         player2angle: "",
-        moves: 0
       }
     }
   },
@@ -58,7 +53,7 @@ export default {
       this.player_data.player2life = this.Game.game.tank.life2;
       this.player_data.player1angle = this.Game.game.tank.angle1;
       this.player_data.player2angle = this.Game.game.tank.angle2;
-      this.player_data.moves = this.Game.game.map.moves;
+
   },
   methods: {
   }

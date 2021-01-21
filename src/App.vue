@@ -5,15 +5,25 @@
 </template>
 
 <script>
-  import Footer from "@/components/Footer";
   export default {
-    components: {Footer},
-    data: () => ({ drawer: null,  }),
+    created() {
+      if (this.$workbox) {
+        this.$workbox.addEventListener("waiting", () => {
+          this.showUpgradeUI = true;
+        });
+      }
+    },
+
+    methods: {
+      async accept() {
+        this.showUpgradeUI = false
+        await this.$workbox.messageSW({ type: "SKIP_WAITING" });
+      }
+    },
   }
 </script>
 
 <style>
-
   /* Menu */
   .menubutton {
     margin-left: auto;
@@ -106,6 +116,7 @@
     position: relative;
     display: flex;
     font-weight: bold;
+    margin-top: 20px;
   }
 
   .gameplay_buttons {
@@ -125,6 +136,14 @@
     margin-right: auto;
     margin-left: auto;
     float: left;
+  }
+
+  #player1 label {
+    font-size: 20px;
+  }
+
+  #player2 label {
+    font-size: 20px;
   }
 
   @media(max-width: 1500px) {

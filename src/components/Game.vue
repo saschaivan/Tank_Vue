@@ -71,8 +71,8 @@ export default {
     startGame: function () {
       this.tank_player1.Name.push(this.Game.game.player1.name);
       this.tank_player2.Name.push(this.Game.game.player2.name);
-      this.tank_player1.x = this.Game.game.player1.posx * 16; // ~15 -> 240 (16)
-      this.tank_player1.y = this.Game.game.player1.posy * 32; // ~11 -> 350 (32)
+      this.tank_player1.x = this.Game.game.player1.posx * 13; // ~15 -> 240 (16)
+      this.tank_player1.y = this.Game.game.player1.posy * 27; // ~11 -> 350 (32)
       this.tank_player2.x = this.Game.game.player2.posx * 13; // ~88 -> 1100 (13)
       this.tank_player2.y = this.Game.game.player2.posy * 39; // ~9 -> 350 (39)
       this.getMap();
@@ -86,7 +86,7 @@ export default {
     getMap: function () {
       let i = 0;
       while(i < this.Map.map.length - 1) {
-        this.mapcoordinates.mapx.push(this.Map.map[i]); // get the x value out of the array of arrays, 0 -> +240 (scale)
+        this.mapcoordinates.mapx.push(this.Map.map[i] + 50); // get the x value out of the array of arrays, +50 px to move it more to the middle
         this.mapcoordinates.mapy.push(this.Map.map[i + 1]); // get the y value out of the array of arrays, 10 -> *35 = 350 (scale)
         i += 2;
       }
