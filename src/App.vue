@@ -1,6 +1,38 @@
 <template>
   <v-app>
-    <router-view />
+    <v-navigation-drawer
+        v-model="drawer"
+        app>
+      <v-list
+          dense
+          nav
+      >
+        <v-list-item
+            v-for="item in this.navItems"
+            :key="item.title"
+            link
+            :to="item.to"
+        >
+          <v-list-item-icon>
+            <v-icon>{{ item.icon }}</v-icon>
+          </v-list-item-icon>
+
+          <v-list-item-content>
+            <v-list-item-title>{{ item.title }}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
+
+    <v-app-bar app>
+      <v-app-bar-nav-icon @click="drawer =! drawer"></v-app-bar-nav-icon>
+      <v-toolbar-title class="font-weight-bold d-inline-flex">Tank</v-toolbar-title>
+    </v-app-bar>
+
+    <v-main>
+      <router-view />
+    </v-main>
+
   </v-app>
 </template>
 
@@ -8,7 +40,14 @@
   import Footer from "@/components/Footer";
   export default {
     components: {Footer},
-    data: () => ({ drawer: null,  }),
+    data: () => ({
+      drawer: null,
+      navItems :[
+        {title: "Start", icon : 'mdi-account', to:"/"},
+        {title: "Game", icon : 'mdi-gamepad', to:"/game"},
+        {title: "About", icon: 'mdi-help-circle', to:"/about"},
+      ]
+    }),
   }
 </script>
 
